@@ -1,0 +1,24 @@
+{
+    "name": "atico/spreadsheet-translator-reader-xlsx",
+    "license": "MIT",
+    "type": "library",
+    "description": "Spreadsheet Translator - Library that reads xlsx files and converts to array",
+    "keywords": ["xlsx file reader", "convert xlsx into array", "read spreadsheet files and convert into array", "convert spreadsheet file into array"],
+    "autoload": {
+        "psr-4": {
+            "Atico\\SpreadsheetTranslator\\Reader\\Xlsx\\": "./src"
+        }
+    },
+    "repositories": [{
+        "type": "path",
+        "url": "../../Core",
+        "options": {
+            "symlink": true
+        }
+    }],
+    "require": {
+        "atico/spreadsheet-translator-core": "^1.0",
+        "php": ">=5.5.9",
+        "guzzlehttp/guzzle": "6.2.2"
+    }
+}
