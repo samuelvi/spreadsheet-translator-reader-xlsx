@@ -19,6 +19,7 @@
     "require": {
         "atico/spreadsheet-translator-core": "^1.0",
         "php": ">=5.5.9",
-        "guzzlehttp/guzzle": "6.2.2"
+        "guzzlehttp/guzzle": "6.2.2",
+        "liuggio/excelbundle": "2.1.0"
     }
 }
