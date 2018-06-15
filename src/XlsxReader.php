@@ -32,17 +32,17 @@ class XlsxReader extends AbstractArrayReader implements ReaderInterface
     function __construct($filePath)
     {
         $this->excel = PHPExcel_IOFactory::load($filePath);
-        $this->sheets = $this->excel->getAllSheets();
+        $this->sheets = null;
     }
 
-    public function getSheets()
+    public function getSheetNames()
     {
-        return $this->sheets;
+        return $this->excel->getSheetNames();
     }
 
     public function getTitle($index)
     {
-        return $this->sheets[$index]->getTitle();
+        return $this->getSheetIndex($index)->getTitle();
     }
 
     /**
@@ -68,4 +68,17 @@ class XlsxReader extends AbstractArrayReader implements ReaderInterface
         return $this->getData($sheetName);
     }
 
+    public function getSheets()
+    {
+        if (null === $this->sheets) {
+            $this->sheets = $this->excel->getAllSheets();
+        }
+
+        return $this->sheets;
+    }
+
+    public function getSheetIndex($index)
+    {
+        return $this->getSheets()[$index];
+    }
 }
