@@ -79,6 +79,6 @@ class XlsxReader extends AbstractArrayReader implements ReaderInterface
 
     public function getSheetIndex($index)
     {
-        return $this->getSheets()[$index];
+        return $this->getSheets()[$index]; 
     }
 }
