@@ -11,7 +11,7 @@
 
 namespace Atico\SpreadsheetTranslator\Reader\Xlsx;
 
-use Atico\SpreadsheetTranslator\Core\Exception\SheetNameNotFound;
+use Atico\SpreadsheetTranslator\Core\Exception\SheetNameNotFoundException;
 use Atico\SpreadsheetTranslator\Core\Reader\AbstractArrayReader;
 use Atico\SpreadsheetTranslator\Core\Reader\ReaderInterface;
 use PHPExcel;
@@ -55,14 +55,14 @@ class XlsxReader extends AbstractArrayReader implements ReaderInterface
     }
 
     /**
-     * @throws SheetNameNotFound
+     * @throws SheetNameNotFoundException
      */
     public function getDataBySheetName($name)
     {
         $sheetName = $this->excel->getSheetByName($name);
 
         if (empty($sheetName)) {
-            throw SheetNameNotFound::create($name);
+            throw SheetNameNotFoundException::create($name);
         }
 
         return $this->getData($sheetName);
@@ -79,6 +79,6 @@ class XlsxReader extends AbstractArrayReader implements ReaderInterface
 
     public function getSheetIndex($index)
     {
-        return $this->getSheets()[$index]; 
+        return $this->getSheets()[$index];
     }
 }
