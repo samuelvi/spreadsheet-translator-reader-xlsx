@@ -14,24 +14,28 @@ namespace Atico\SpreadsheetTranslator\Reader\Xlsx;
 use Atico\SpreadsheetTranslator\Core\Exception\SheetNameNotFoundException;
 use Atico\SpreadsheetTranslator\Core\Reader\AbstractArrayReader;
 use Atico\SpreadsheetTranslator\Core\Reader\ReaderInterface;
-use PHPExcel;
-use PHPExcel_IOFactory;
-use PHPExcel_Worksheet;
+
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 class XlsxReader extends AbstractArrayReader implements ReaderInterface
 {
     /** @var \PHPExcel_Worksheet[] $sheets */
     protected $sheets;
 
-    /** @var PHPExcel $excel */
+    /** @var Spreadsheet $excel */
     protected $excel;
 
     /**
-     * @throws \PHPExcel_Reader_Exception
+     * @throws \Exception
      */
     function __construct($filePath)
     {
-        $this->excel = PHPExcel_IOFactory::load($filePath);
+        $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+        $reader->setReadDataOnly(true);
+        $this->excel = $reader->load($filePath);
+
+        //$this->excel = PHPExcel_IOFactory::load($filePath);
         $this->sheets = null;
     }
 
@@ -46,7 +50,7 @@ class XlsxReader extends AbstractArrayReader implements ReaderInterface
     }
 
     /**
-     * @param PHPExcel_Worksheet $sheet
+     * @param Worksheet $sheet
      * @return mixed
      */
     public function getData($sheet)
