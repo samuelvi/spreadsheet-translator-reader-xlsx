@@ -17,10 +17,11 @@ use Atico\SpreadsheetTranslator\Core\Reader\ReaderInterface;
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+use PhpOffice\PhpSpreadsheet\Reader\Xlsx as XlsxReaderBase;
 
 class XlsxReader extends AbstractArrayReader implements ReaderInterface
 {
-    /** @var \PHPExcel_Worksheet[] $sheets */
+    /** @var Worksheet[] $sheets */
     protected $sheets;
 
     /** @var Spreadsheet $excel */
@@ -31,11 +32,10 @@ class XlsxReader extends AbstractArrayReader implements ReaderInterface
      */
     function __construct($filePath)
     {
-        $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+        $reader = new XlsxReaderBase();
         $reader->setReadDataOnly(true);
         $this->excel = $reader->load($filePath);
 
-        //$this->excel = PHPExcel_IOFactory::load($filePath);
         $this->sheets = null;
     }
 
